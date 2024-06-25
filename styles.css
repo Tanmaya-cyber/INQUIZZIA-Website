@@ -1,0 +1,161 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #4b0082;
+}
+
+header {
+    background-color: #4b0082; /* Purple */
+    color: #ffd700; /* Golden */
+    padding: 20px 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    color: #ffd700; /* Golden */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #4b0082; /* Purple */
+    color: #ffd700; /* Golden */
+}
+
+.hero h2 {
+    font-size: 2.5em;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+.hero .btn {
+    padding: 10px 20px;
+    background-color: #ffd700; /* Golden */
+    color: #4b0082; /* Purple */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.hero .btn:hover {
+    background-color: #daa520; /* Darker golden */
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h2, h3 {
+    color: #4b0082; /* Purple */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #4b0082; /* Purple */
+}
+
+form input {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #4b0082; /* Purple border */
+    border-radius: 4px;
+}
+
+form button {
+    padding: 10px;
+    background-color: #ffd700; /* Golden */
+    color: #4b0082; /* Purple */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #daa520; /* Darker golden */
+}
+
+footer {
+    background-color: #4b0082; /* Purple */
+    color: #ffd700; /* Golden */
+    text-align: center;
+    padding: 10px 0;
+}
+
+.resized-logo {
+    width: 50px; /* Set your desired width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Adjusted grid columns */
+    object-fit: cover; /* Ensures the images cover the space without distortion */
+    gap: 16px;
+    padding: 10px;
+}
+
+.gallery-image {
+    width: 250px; /* Set the desired width for the images */
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.8s;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+    transition: filter 0.8s ease-in-out;
+}
+
+.image-container img:hover {
+    filter: grayscale(0%);
+}
