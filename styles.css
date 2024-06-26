@@ -132,14 +132,14 @@ footer {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Adjusted grid columns */
+    grid-template-columns: repeat(3, 1fr); /* Adjusted grid columns */
     object-fit: cover; /* Ensures the images cover the space without distortion */
     gap: 16px;
     padding: 10px;
 }
 
 .gallery-image {
-    width: 250px; /* Set the desired width for the images */
+    width: 300px; /* Set the desired width for the images */
     height: auto;
     border-radius: 8px;
     transition: transform 0.8s;
