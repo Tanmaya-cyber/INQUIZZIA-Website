@@ -41,6 +41,7 @@
             min-width: 300px; /* Change this to the desired width */
             margin: 0 10px;
             flex-shrink: 0;
+            transition: transform 0.3s;
         }
 
         .slidex img {
@@ -48,6 +49,11 @@
             height: auto; /* Maintain aspect ratio */
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .slidex:hover img {
+            transform: scale(1.05);
         }
 
         .button {
@@ -77,6 +83,26 @@
         #nextBtn {
             right: 0;
         }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #717171;
+        }
     </style>
 </head>
 <body>
@@ -105,75 +131,102 @@
 
     <div class="slider-containerx">
         <div class="sliderx" id="sliderx">
-            <div class="slidex"><img src="imgs/gp 5.jpg" alt="Image 5"></div> <!-- Duplicate of the last image -->
-            <div class="slidex"><img src="imgs/gp 6.jpg" alt="Image 1"></div>
-            <div class="slidex"><img src="imgs/gp 7.jpg" alt="Image 2"></div>
-            <div class="slidex"><img src="imgs/gp 8.JPG" alt="Image 3"></div>
-            <div class="slidex"><img src="imgs/gp 9.jpg" alt="Image 4"></div>
+            <div class="slidex"><img src="imgs/gp 1.jpg" alt="Image 1"></div>
+            <div class="slidex"><img src="imgs/gp 2.jpg" alt="Image 2"></div>
+            <div class="slidex"><img src="imgs/gp 3.JPG" alt="Image 3"></div>
+            <div class="slidex"><img src="imgs/gp 4.jpg" alt="Image 4"></div>
             <div class="slidex"><img src="imgs/gp 5.jpg" alt="Image 5"></div>
-            <div class="slidex"><img src="imgs/gp 6.jpg" alt="Image 1"></div> <!-- Duplicate of the first image -->
+            <div class="slidex"><img src="imgs/gp 6.jpg" alt="Image 6"></div>
+            <div class="slidex"><img src="imgs/gp 7.jpg" alt="Image 7"></div>
+            <!-- Duplicate slides for infinite scroll -->
+            <div class="slidex"><img src="imgs/gp 1.jpg" alt="Image 1"></div>
         </div>
         <button class="button" id="prevBtn">Prev</button>
         <button class="button" id="nextBtn">Next</button>
+        <div class="dots" id="dots"></div>
     </div>
 
     <script>
-        const sliderx = document.getElementById('sliderx');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const totalSlides = sliderx.children.length - 2; // Exclude the two duplicated slides
+        document.addEventListener('DOMContentLoaded', () => {
+            const sliderx = document.getElementById('sliderx');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dotsContainer = document.getElementById('dots');
+            const slides = sliderx.children;
+            const totalSlides = slides.length - 1; // Exclude the duplicated slide at the end
 
-        let currentIndex = 1; // Start at the first actual slide
-        let autoSlideInterval;
+            let currentIndex = 1;
+            let autoSlideInterval;
 
-        function updateSlider() {
-            const slideWidth = sliderx.children[0].getBoundingClientRect().width + 20; // slide width + margin
-            sliderx.style.transition = 'transform 0.5s ease-in-out';
-            sliderx.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-
-            if (currentIndex === 0) {
-                setTimeout(() => {
-                    sliderx.style.transition = 'none';
-                    currentIndex = totalSlides;
-                    sliderx.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-                }, 500);
-            } else if (currentIndex === totalSlides + 1) {
-                setTimeout(() => {
-                    sliderx.style.transition = 'none';
-                    currentIndex = 1;
-                    sliderx.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-                }, 500);
+            function createDots() {
+                for (let i = 0; i < totalSlides - 1; i++) { // Create dots only for actual slides
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active');
+                    dotsContainer.appendChild(dot);
+                }
             }
-        }
 
-        function startAutoSlide() {
-            autoSlideInterval = setInterval(() => {
+            function updateDots() {
+                const dots = dotsContainer.children;
+                Array.from(dots).forEach((dot, index) => {
+                    dot.classList.toggle('active', index === (currentIndex - 1) % (totalSlides - 1));
+                });
+            }
+
+            function updateSlider() {
+                const slideWidth = slides[0].getBoundingClientRect().width + 20; // slide width + margin
+                sliderx.style.transition = 'transform 0.5s ease-in-out';
+                sliderx.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+
+                if (currentIndex === 0) {
+                    setTimeout(() => {
+                        sliderx.style.transition = 'none';
+                        currentIndex = totalSlides - 1;
+                        sliderx.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+                    }, 500);
+                } else if (currentIndex === totalSlides) {
+                    setTimeout(() => {
+                        sliderx.style.transition = 'none';
+                        currentIndex = 1;
+                        sliderx.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+                    }, 500);
+                }
+                updateDots();
+            }
+
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    currentIndex++;
+                    updateSlider();
+                }, 3000); // Change slides every 3 seconds
+            }
+
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+
+            prevBtn.addEventListener('click', () => {
+                stopAutoSlide();
+                currentIndex--;
+                updateSlider();
+                startAutoSlide();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                stopAutoSlide();
                 currentIndex++;
                 updateSlider();
-            }, 3000); // Change slides every 3 seconds
-        }
+                startAutoSlide();
+            });
 
-        function stopAutoSlide() {
-            clearInterval(autoSlideInterval);
-        }
+            sliderx.addEventListener('mouseover', stopAutoSlide);
+            sliderx.addEventListener('mouseout', startAutoSlide);
 
-        prevBtn.addEventListener('click', () => {
-            stopAutoSlide();
-            currentIndex--;
+            createDots();
             updateSlider();
             startAutoSlide();
         });
-
-        nextBtn.addEventListener('click', () => {
-            stopAutoSlide();
-            currentIndex++;
-            updateSlider();
-            startAutoSlide();
-        });
-
-        // Initialize slider position and start auto sliding
-        updateSlider();
-        startAutoSlide();
     </script>
 </body>
 </html>
