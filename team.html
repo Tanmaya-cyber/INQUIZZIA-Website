@@ -24,6 +24,7 @@
       --primary: #ec994b;
       --white: #ffffff;
       --bg: #f5f5f5;
+      --light-blue: #add8e6;
     }
 
     html {
@@ -157,6 +158,10 @@
       gap: 1rem;
     }
 
+    .swiper-slide {
+      transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    }
+
     .swiper-slide-shadow-left,
     .swiper-slide-shadow-right {
       display: none;
@@ -170,62 +175,40 @@
       justify-content: center;
     }
 
-    .trending-slider-control .swiper-button-next {
-      left: 58% !important;
-      transform: translateX(-58%) !important;
-    }
-
-    @media (max-width: 990px) {
-      .trending-slider-control .swiper-button-next {
-        left: 70% !important;
-        transform: translateX(-70%) !important;
-      }
-    }
-
-    @media (max-width: 450px) {
-      .trending-slider-control .swiper-button-next {
-        left: 80% !important;
-        transform: translateX(-80%) !important;
-      }
-    }
-
-    @media (max-width: 990px) {
-      .trending-slider-control .swiper-button-prev {
-        left: 30% !important;
-        transform: translateX(-30%) !important;
-      }
-    }
-
-    @media (max-width: 450px) {
-      .trending-slider-control .swiper-button-prev {
-        left: 20% !important;
-        transform: translateX(-20%) !important;
-      }
-    }
-
-    .trending-slider-control .slider-arrow {
-      background: var(--white);
+    .trending-slider-control .custom-next,
+    .trending-slider-control .custom-prev {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
       width: 3.5rem;
       height: 3.5rem;
       border-radius: 50%;
-      left: 42%;
-      transform: translateX(-42%);
-      filter: drop-shadow(0px 8px 24px rgba(18, 28, 53, 0.1));
-    }
-
-    .trending-slider-control .slider-arrow ion-icon {
+      background: var(--light-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      color: var(--white);
       font-size: 2rem;
-      color: #222224;
+      box-shadow: 0px 8px 24px rgba(18, 28, 53, 0.1);
     }
 
-    .trending-slider-control .slider-arrow::after {
-      content: '';
+    .trending-slider-control .custom-next {
+      right: 5rem;
+    }
+
+    .trending-slider-control .custom-prev {
+      left: 5rem;
     }
 
     .trending-slider-control .swiper-pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: relative;
-      width: 15rem;
-      bottom: 1rem;
+      width: 100%;
+      bottom: 0;
     }
 
     .trending-slider-control .swiper-pagination .swiper-pagination-bullet {
@@ -246,6 +229,7 @@
         <ul>
           <li><a href="about.html">About Us</a></li>
           <li><a href="team.html">Our Team</a></li>
+          <li><a href="slider.html">Slider</a></li>
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="sponsors.html">Sponsors</a></li>
           <li><a href="message.html">Message from Director</a></li>
@@ -257,7 +241,7 @@
 
   <div class="container text-center">
     <h2 class="section-heading">Our Team</h2>
-    <p >Meet the dedicated team behind INQUIZZIA 2024.</p>
+    <p>Meet the dedicated team behind INQUIZZIA 2024.</p>
   </div>
 
   <section id="trending">
@@ -268,13 +252,9 @@
         </div>
 
         <div class="trending-slider-control">
-          <div class="swiper-button-prev slider-arrow">
-            <ion-icon name="arrow-back-outline"></ion-icon>
-          </div>
-          <div class="swiper-button-next slider-arrow">
-            <ion-icon name="arrow-forward-outline"></ion-icon>
-          </div>
+          <div class="custom-prev">&lt;</div>
           <div class="swiper-pagination"></div>
+          <div class="custom-next">&gt;</div>
         </div>
       </div>
     </div>
@@ -291,22 +271,19 @@
   <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
   <script>
     const teamMembers = [
-      { name: "Chetna Sai Nanda", role: "Team Head", image: "imgs/chetna.JPG" },
-      { name: "Ayeshkant Tripathy", role: "Logistics Head", image: "imgs/ayeshkant.JPG" },
-      { name: "Khyati Nayak", role: "Content Creator", image: "imgs/khyati.JPG" },
-      { name: "Navneet Nayak", role: "Quiz Master", image: "imgs/navneet.JPG" },
-      { name: "Shubhranshu Das", role: "Design Head", image: "imgs/subhranshu.JPG" },
-      { name: "Tanmaya Rout", role: "Quiz Master", image: "imgs/tanmaya.JPG" },
-      { name: "Snigdha Mohapatra", role: "Design Head", image: "imgs/snigdha.JPG" },
-      { name: "Sushil Singh Yadav", role: "Logistics Head", image: "imgs/sushil.JPG" },
-      { name: "Subhojeet Biswas", role: "Quiz Master", image: "imgs/subhojeet.JPG" },
-      { name: "Piush Praharaj", role: "Quiz Master", image: "imgs/piush.JPG" },
+      { name: "Khyati Nayak", role: "Content Creator", image: "imgs/khyati.jpg" },
+      { name: "Navneet Nayak", role: "Quiz Master", image: "imgs/navneet.jpg" },
+      { name: "Shubhranshu Das", role: "Design Head", image: "imgs/subhranshu.jpg" },
+      { name: "Tanmaya Rout", role: "Quiz Master", image: "imgs/tanmaya.jpg" },
+      { name: "Snigdha Mohapatra", role: "Design Head", image: "imgs/snigdha.jpg" },
+      { name: "Subhojeet Biswas", role: "Quiz Master", image: "imgs/subhojeet.jpg" },
+      { name: "Piush Praharaj", role: "Quiz Master", image: "imgs/piush.jpg" },
       { name: "Banshita Sen", role: "Content Creator", image: "imgs/banshita.JPG" },
-      { name: "Abinash Mohapatra", role: "Design Head", image: "imgs/abinash.JPG" },
-      { name: "Deepak Kumar Gouda", role: "Core Committee", image: "imgs/deepak.JPG" },
-      { name: "Aryan", role: "Core Committee", image: "imgs/aryan.JPG" },
-      { name: "Pratyush Behera", role: "Core Committee", image: "imgs/piush.JPG" },
-      { name: "Suman Sourav", role: "Core Committee", image: "imgs/suman.JPG" }
+      { name: "Abinash Mohapatra", role: "Design Head", image: "imgs/abinash.jpg" },
+      { name: "Deepak Kumar Gouda", role: "Core Committee", image: "imgs/deepak.jpg" },
+      { name: "Aryan", role: "Core Committee", image: "imgs/aryan.jpg" },
+      { name: "Pratyush Behera", role: "Core Committee", image: "imgs/piush.jpg" },
+      { name: "Suman Sourav", role: "Core Committee", image: "imgs/suman.jpg" }
     ];
 
     const teamSlides = document.getElementById('team-slides');
@@ -336,6 +313,7 @@
       centeredSlides: true,
       loop: true,
       slidesPerView: 'auto',
+      speed: 800,
       autoplay: {
         delay: 4000, // 4 seconds delay
         disableOnInteraction: false,
@@ -351,8 +329,8 @@
         clickable: true,
       },
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: '.custom-next',
+        prevEl: '.custom-prev',
       }
     });
   </script>
