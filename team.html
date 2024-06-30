@@ -1,232 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Page</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /*body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }*/
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Page</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
-        .team-section {
-            text-align: center;
-            padding: 20px;
-        }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      list-style-type: none;
+      text-decoration: none;
+    }
 
-        .slider-containerx {
-            display: flex;
-            justify-content: center; /* Center align horizontally */
-            align-items: center; /* Center align vertically */
-            position: relative;
-            width: 80%;
-            overflow: hidden;
-            margin: 20px auto; /* Center align horizontally */
-        }
+    :root {
+      --primary: #ec994b;
+      --white: #ffffff;
+      --bg: #f5f5f5;
+    }
 
-        .sliderx {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
+    html {
+      font-size: 62.5%;
+      font-family: "Montserrat", sans-serif;
+      scroll-behavior: smooth;
+    }
 
-        .slidex {
-            min-width: 300px; /* Change this to the desired width */
-            margin: 0 10px;
-            flex-shrink: 0;
-            transition: transform 0.3s;
-        }
+    @media (min-width: 1440px) {
+      html {
+        zoom: 1.5;
+      }
+    }
 
-        .slidex img {
-            width: 400px; /* Take up the full width of the slide */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
+    @media (min-width: 2560px) {
+      html {
+        zoom: 1.7;
+      }
+    }
 
-        .slidex:hover img {
-            transform: scale(1.05);
-        }
+    @media (min-width: 3860px) {
+      html {
+        zoom: 2.5;
+      }
+    }
 
-        .button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 10px 20px;
-            border: none;
-            background-color: transparent; /* Changed to transparent */
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            z-index: 1;
-            border: 1px solid transparent; /* Optional: adds a border */
-        }
+    ::-webkit-scrollbar {
+      width: 1.3rem;
+    }
 
-        .button:hover {
-            background-color: rgba(0, 123, 255, 0.2); /* Semi-transparent hover color */
-            border-color: #007bff; /* Optional: border color on hover */
-        }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 1rem;
+      background: #797979;
+      transition: all 0.5s ease-in-out;
+    }
 
-        #prevBtn {
-            left: 0;
-        }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #222224;
+    }
 
-        #nextBtn {
-            right: 0;
-        }
+    ::-webkit-scrollbar-track {
+      background: #f9f9f9;
+    }
 
-        .dots {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
+    body {
+      font-size: 1.6rem;
+      background: var(--bg);
+    }
 
-        .dot {
-            height: 15px;
-            width: 15px;
-            margin: 0 5px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.3s;
-        }
+    .container {
+      max-width: 124rem;
+      padding: 0 1rem;
+      margin: 0 auto;
+    }
 
-        .dot.active {
-            background-color: #717171;
-        }
-    </style>
+    .text-center {
+      text-align: center;
+    }
+
+    .section-heading {
+      font-size: 3rem;
+      color: var(--primary);
+      padding: 2rem 0;
+    }
+
+    #trending {
+      padding: 4rem 0;
+    }
+
+    @media (max-width: 1440px) {
+      #trending {
+        padding: 7rem 0;
+      }
+    }
+
+    #trending .trending-slider {
+      height: 52rem;
+      padding: 2rem 0;
+      position: relative;
+    }
+
+    @media (max-width: 500px) {
+      #trending .trending-slider {
+        height: 45rem;
+      }
+    }
+
+    .trending-slide {
+      width: 37rem;
+      height: 42rem;
+      position: relative;
+    }
+
+    @media (max-width: 500px) {
+      .trending-slide {
+        width: 28rem !important;
+        height: 36rem !important;
+      }
+
+      .trending-slide .trending-slide-img img {
+        width: 28rem !important;
+        height: 36rem !important;
+      }
+    }
+
+    .trending-slide .trending-slide-img img {
+      width: 37rem;
+      height: 42rem;
+      border-radius: 2rem;
+      object-fit: cover;
+    }
+
+    .trending-slide .trending-slide-content {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .trending-slide-content .trending-slide-content-bottom {
+      position: absolute;
+      bottom: 2rem;
+      left: 2rem;
+      color: var(--white);
+    }
+
+    .designation {
+      padding-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .swiper-slide-shadow-left,
+    .swiper-slide-shadow-right {
+      display: none;
+    }
+
+    .trending-slider-control {
+      position: relative;
+      bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .trending-slider-control .swiper-button-next {
+      left: 58% !important;
+      transform: translateX(-58%) !important;
+    }
+
+    @media (max-width: 990px) {
+      .trending-slider-control .swiper-button-next {
+        left: 70% !important;
+        transform: translateX(-70%) !important;
+      }
+    }
+
+    @media (max-width: 450px) {
+      .trending-slider-control .swiper-button-next {
+        left: 80% !important;
+        transform: translateX(-80%) !important;
+      }
+    }
+
+    @media (max-width: 990px) {
+      .trending-slider-control .swiper-button-prev {
+        left: 30% !important;
+        transform: translateX(-30%) !important;
+      }
+    }
+
+    @media (max-width: 450px) {
+      .trending-slider-control .swiper-button-prev {
+        left: 20% !important;
+        transform: translateX(-20%) !important;
+      }
+    }
+
+    .trending-slider-control .slider-arrow {
+      background: var(--white);
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      left: 42%;
+      transform: translateX(-42%);
+      filter: drop-shadow(0px 8px 24px rgba(18, 28, 53, 0.1));
+    }
+
+    .trending-slider-control .slider-arrow ion-icon {
+      font-size: 2rem;
+      color: #222224;
+    }
+
+    .trending-slider-control .slider-arrow::after {
+      content: '';
+    }
+
+    .trending-slider-control .swiper-pagination {
+      position: relative;
+      width: 15rem;
+      bottom: 1rem;
+    }
+
+    .trending-slider-control .swiper-pagination .swiper-pagination-bullet {
+      filter: drop-shadow(0px 8px 24px rgba(18, 28, 53, 0.1));
+    }
+
+    .trending-slider-control .swiper-pagination .swiper-pagination-bullet-active {
+      background: var(--primary);
+    }
+  </style>
 </head>
+
 <body>
-
-    <header>
-        <div class="container">
-            <a href="index.html"><img src="imgs/sqc logo.png" alt="INQUIZZIA Logo" class="logo resized-logo"></a>
-            <nav>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="team.html">Our Team</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="sponsors.html">Sponsors</a></li>
-                    <li><a href="message.html">Message from Director</a></li>
-                    <li><a href="register.html">Register Now</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+  <header>
     <div class="container">
-        <h2>Our Team</h2>
-        <p>Meet the dedicated team behind INQUIZZIA 2024.</p>
-        <!-- Team member details -->
+      <a href="index.html"><img src="imgs/sqc logo.png" alt="INQUIZZIA Logo" class="logo resized-logo"></a>
+      <nav>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="team.html">Our Team</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="sponsors.html">Sponsors</a></li>
+          <li><a href="message.html">Message from Director</a></li>
+          <li><a href="register.html">Register Now</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <div class="slider-containerx">
-        <div class="sliderx" id="sliderx">
-            <div class="slidex"><img src="imgs/gp 1.jpg" alt="Image 1"></div>
-            <div class="slidex"><img src="imgs/gp 2.jpg" alt="Image 2"></div>
-            <div class="slidex"><img src="imgs/gp 3.JPG" alt="Image 3"></div>
-            <div class="slidex"><img src="imgs/gp 4.jpg" alt="Image 4"></div>
-            <div class="slidex"><img src="imgs/gp 5.jpg" alt="Image 5"></div>
-            <div class="slidex"><img src="imgs/gp 6.jpg" alt="Image 6"></div>
-            <div class="slidex"><img src="imgs/gp 7.jpg" alt="Image 7"></div>
-            <!-- Duplicate slides for infinite scroll -->
-            <div class="slidex"><img src="imgs/gp 1.jpg" alt="Image 1"></div>
+  <div class="container text-center">
+    <h2 class="section-heading">Our Team</h2>
+    <p >Meet the dedicated team behind INQUIZZIA 2024.</p>
+  </div>
+
+  <section id="trending">
+    <div class="container">
+      <div class="swiper trending-slider">
+        <div class="swiper-wrapper" id="team-slides">
+          <!-- Slides will be generated by JavaScript -->
         </div>
-        <button class="button" id="prevBtn">Prev</button>
-        <button class="button" id="nextBtn">Next</button>
-        <div class="dots" id="dots"></div>
+
+        <div class="trending-slider-control">
+          <div class="swiper-button-prev slider-arrow">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <div class="swiper-button-next slider-arrow">
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sliderx = document.getElementById('sliderx');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const dotsContainer = document.getElementById('dots');
-            const slides = sliderx.children;
-            const totalSlides = slides.length - 1; // Exclude the duplicated slide at the end
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 INQUIZZIA. All rights reserved.</p>
+    </div>
+  </footer>
 
-            let currentIndex = 1;
-            let autoSlideInterval;
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+  <script>
+    const teamMembers = [
+      { name: "Khyati Nayak", role: "Content Creator", image: "imgs/khyati.jpg" },
+      { name: "Navneet Nayak", role: "Quiz Master", image: "imgs/navneet.jpg" },
+      { name: "Shubhranshu Das", role: "Design Head", image: "imgs/subhranshu.jpg" },
+      { name: "Tanmaya Rout", role: "Quiz Master", image: "imgs/tanmaya.jpg" },
+      { name: "Snigdha Mohapatra", role: "Design Head", image: "imgs/snigdha.jpg" },
+      { name: "Subhojeet Biswas", role: "Quiz Master", image: "imgs/subhojeet.jpg" },
+      { name: "Piush Praharaj", role: "Quiz Master", image: "imgs/piush.jpg" },
+      { name: "Banshita Sen", role: "Content Creator", image: "imgs/banshita.JPG" },
+      { name: "Abinash Mohapatra", role: "Design Head", image: "imgs/abinash.jpg" },
+      { name: "Deepak Kumar Gouda", role: "Core Committee", image: "imgs/deepak.jpg" },
+      { name: "Aryan", role: "Core Committee", image: "imgs/aryan.jpg" },
+      { name: "Pratyush Behera", role: "Core Committee", image: "imgs/piush.jpg" },
+      { name: "Suman Sourav", role: "Core Committee", image: "imgs/suman.jpg" }
+    ];
 
-            function createDots() {
-                for (let i = 0; i < totalSlides - 1; i++) { // Create dots only for actual slides
-                    const dot = document.createElement('div');
-                    dot.classList.add('dot');
-                    if (i === 0) dot.classList.add('active');
-                    dotsContainer.appendChild(dot);
-                }
-            }
+    const teamSlides = document.getElementById('team-slides');
 
-            function updateDots() {
-                const dots = dotsContainer.children;
-                Array.from(dots).forEach((dot, index) => {
-                    dot.classList.toggle('active', index === (currentIndex - 1) % (totalSlides - 1));
-                });
-            }
+    teamMembers.forEach(member => {
+      const slide = document.createElement('div');
+      slide.classList.add('swiper-slide', 'trending-slide');
 
-            function updateSlider() {
-                const slideWidth = slides[0].getBoundingClientRect().width + 20; // slide width + margin
-                sliderx.style.transition = 'transform 0.5s ease-in-out';
-                sliderx.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+      slide.innerHTML = `
+        <div class="trending-slide-img">
+          <img src="${member.image}" alt="${member.name}">
+        </div>
+        <div class="trending-slide-content">
+          <div class="trending-slide-content-bottom">
+            <h2 class="name">${member.name}</h2>
+            <h3 class="designation">${member.role}</h3>
+          </div>
+        </div>
+      `;
 
-                if (currentIndex === 0) {
-                    setTimeout(() => {
-                        sliderx.style.transition = 'none';
-                        currentIndex = totalSlides - 1;
-                        sliderx.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-                    }, 500);
-                } else if (currentIndex === totalSlides) {
-                    setTimeout(() => {
-                        sliderx.style.transition = 'none';
-                        currentIndex = 1;
-                        sliderx.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-                    }, 500);
-                }
-                updateDots();
-            }
+      teamSlides.appendChild(slide);
+    });
 
-            function startAutoSlide() {
-                autoSlideInterval = setInterval(() => {
-                    currentIndex++;
-                    updateSlider();
-                }, 3000); // Change slides every 3 seconds
-            }
-
-            function stopAutoSlide() {
-                clearInterval(autoSlideInterval);
-            }
-
-            prevBtn.addEventListener('click', () => {
-                stopAutoSlide();
-                currentIndex--;
-                updateSlider();
-                startAutoSlide();
-            });
-
-            nextBtn.addEventListener('click', () => {
-                stopAutoSlide();
-                currentIndex++;
-                updateSlider();
-                startAutoSlide();
-            });
-
-            sliderx.addEventListener('mouseover', stopAutoSlide);
-            sliderx.addEventListener('mouseout', startAutoSlide);
-
-            createDots();
-            updateSlider();
-            startAutoSlide();
-        });
-    </script>
+    var TrendingSlider = new Swiper('.trending-slider', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      loop: true,
+      slidesPerView: 'auto',
+      autoplay: {
+        delay: 4000, // 4 seconds delay
+        disableOnInteraction: false,
+      },
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 100,
+        modifier: 2.5,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }
+    });
+  </script>
 </body>
 </html>
