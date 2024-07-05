@@ -57,26 +57,5 @@
             <p>&copy; 2024 INQUIZZIA. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-        // JavaScript for image slider
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('.sponsor-image');
-        const totalSlides = slides.length;
-
-        function showSlides() {
-            slides.forEach(slide => {
-                slide.style.display = 'none';
-            });
-
-            slideIndex = (slideIndex + 1) % totalSlides;
-            slides[slideIndex].style.display = 'block';
-
-            setTimeout(showSlides, 3000); // Change image every 3 seconds
-        }
-
-        // Call showSlides initially to start automatic sliding
-        showSlides();
-    </script>
 </body>
 </html>
