@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sponsors - INQUIZZIA 2024</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .sponsor-image {
+            width: 250px; /* Adjust the size as needed */
+            margin: 10px;
+        }
+
+        .sponsors-container {
+            background-color: darkslategrey;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            justify-items: center;
+        }
+    </style>
 </head>
 <body>
     <header class="translucent-header">
@@ -14,6 +28,7 @@
                 <ul>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="team.html">Our Team</a></li>
+                    <li><a href="slider.html">Slider</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="sponsors.html">Sponsors</a></li>
                     <li><a href="message.html">Message from Director</a></li>
@@ -28,23 +43,11 @@
             <h2>Sponsors</h2>
             <p>We thank our generous sponsors for their support.</p>
             
-            <div class="slider">
-                <div class="slides">
-                    <div class="slide">
-                        <img src="imgs/20230720_031740_0000 (1) 2.png" alt="Sponsor 1" class="sponsor-image">
-                    </div>
-                    <div class="slide">
-                        <img src="imgs/lylalia.png" alt="Sponsor 2" class="sponsor-image">
-                    </div>
-                    <div class="slide">
-                        <img src="imgs/bomjunc.png" alt="Sponsor 3" class="sponsor-image">
-                    </div>
-                    <div class="slide">
-                        <img src="imgs/bbsrbuzz.png" alt="Sponsor 4" class="sponsor-image">
-                    </div>
-                </div>
-                <a class="prev" onclick="changeSlide(-1)" aria-label="Previous">&#10094;</a>
-                <a class="next" onclick="changeSlide(1)" aria-label="Next">&#10095;</a>
+            <div class="sponsors-container">
+                <img src="imgs/xculture.png" alt="Sponsor 1" class="sponsor-image">
+                <img src="imgs/lylalia.png" alt="Sponsor 2" class="sponsor-image">
+                <img src="imgs/bomjunc.png" alt="Sponsor 3" class="sponsor-image">
+                <img src="imgs/1593437233933-removebg-preview.png" alt="Sponsor 4" class="sponsor-image">
             </div>
         </div>
     </section>
@@ -56,31 +59,24 @@
     </footer>
 
     <script>
+        // JavaScript for image slider
         let slideIndex = 0;
-        const slides = document.querySelectorAll('.slide');
+        const slides = document.querySelectorAll('.sponsor-image');
         const totalSlides = slides.length;
 
         function showSlides() {
-            slides.forEach((slide, index) => {
-                let adjustedIndex = (index - slideIndex + totalSlides) % totalSlides;
-                slide.style.transition = 'transform 0.5s ease-in-out';
-                slide.style.transform = `translateX(${adjustedIndex * 100}%)`;
+            slides.forEach(slide => {
+                slide.style.display = 'none';
             });
+
+            slideIndex = (slideIndex + 1) % totalSlides;
+            slides[slideIndex].style.display = 'block';
+
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
         }
 
-        function changeSlide(n) {
-            slideIndex = (slideIndex + n + totalSlides) % totalSlides;
-            showSlides();
-        }
-
-        function autoSlide() {
-            slideIndex++;
-            showSlides();
-            setTimeout(autoSlide, 3000); // Change slide every 3 seconds
-        }
-
-        // Call autoSlide initially to start automatic sliding
-        autoSlide();
+        // Call showSlides initially to start automatic sliding
+        showSlides();
     </script>
 </body>
 </html>
