@@ -17,7 +17,36 @@
                     <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="sponsors.html">Sponsors</a></li>
                     <li><a href="message.html">Message from Director</a></li>
-                    <li><a href="register.html">Register Now</a></li>
+                    <li><a href="register.html" id="glowLink" style="color: #ffd700; font-weight: bold; text-decoration: none;">Register Now</a></li>
+
+<script>
+    function setGlowAndBorder() {
+        const link = document.getElementById('glowLink');
+        let glowStrength = 0;
+        let increasing = true;
+
+        setInterval(function() {
+            if (increasing) {
+                glowStrength += 1;
+                if (glowStrength >= 60) {
+                    increasing = false;
+                }
+            } else {
+                glowStrength -= 1;
+                if (glowStrength <= 10) {
+                    increasing = true;
+                }
+            }
+            link.style.textShadow = `
+                0 0 ${glowStrength}px red, 0 0 ${glowStrength * 2}px red, 0 0 ${glowStrength * 3}px red,
+                -1px -1px 0 red, 1px -1px 0 red, -1px 1px 0 red, 1px 1px 0 red
+            `;
+        }, 25   );
+    }
+
+    setGlowAndBorder();
+</script>
+                    
                 </ul>
             </nav>
         </div>
